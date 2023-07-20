@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
     makeStyles, Slider, withStyles, Button, Tooltip, Popover, Grid
 
@@ -65,7 +66,7 @@ const PrettoSlider = withStyles({
     },
 })(Slider);
 
-export default () => {
+export default ({playHandler, playing}) => {
     return (
         <div className="control_Container">
             <div className="top_container">
@@ -77,8 +78,12 @@ export default () => {
                     <FastRewind fontSize="medium" />
                 </div>
 
-                <div className="icon__btn">
-                    <Pause fontSize="medium" />
+                <div className="icon__btn" onClick={playHandler}>
+                    {playing ? (
+                        <Pause fontSize="medium" />
+                    ) : (
+                        <PlayArrow fontSize="medium" />
+                    )}{" "}
                 </div>
 
                 <div className="icon__btn">
@@ -92,8 +97,12 @@ export default () => {
                 </div>
                 <div className="control__box">
                     <div className="inner__controls">
-                        <div className="icon__btn">
-                            <PlayArrow fontSize="medium" />
+                        <div className="icon__btn" onClick={playHandler}>
+                            {playing ? (
+                                <Pause fontSize="medium" />
+                            ) : (
+                                <PlayArrow fontSize="medium" />
+                            )}{" "}
                         </div>
                         <div className="icon__btn">
                             <SkipNext fontSize="medium" />
@@ -103,7 +112,7 @@ export default () => {
                         </div>
 
                         <Slider />
-                        {/*<Slider  className={`${classes.volumeSlider}`}  /> */ }
+                        {/*<Slider  className={`${classes.volumeSlider}`}  /> */}
                         <span>5/20</span>
                     </div>
                 </div>
