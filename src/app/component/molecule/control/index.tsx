@@ -5,8 +5,6 @@ import {
 
 } from "@material-ui/core";
 import {
-    FastForward,
-    FastRewind,
     Pause,
     PlayArrow,
     SkipNext,
@@ -14,6 +12,7 @@ import {
 } from "@material-ui/icons";
 
 import "./styles.css";
+import atom from "../../atom";
 
 const useStyles = makeStyles({
     volumeSlider: {
@@ -66,7 +65,7 @@ const PrettoSlider = withStyles({
     },
 })(Slider);
 
-export default ({playHandler, playing}) => {
+export default ({ playHandler, playing, rwHandler, fwHandler }) => {
     return (
         <div className="control_Container">
             <div className="top_container">
@@ -74,21 +73,9 @@ export default ({playHandler, playing}) => {
             </div>
 
             <div className="mid__container">
-                <div className="icon__btn">
-                    <FastRewind fontSize="medium" />
-                </div>
-
-                <div className="icon__btn" onClick={playHandler}>
-                    {playing ? (
-                        <Pause fontSize="medium" />
-                    ) : (
-                        <PlayArrow fontSize="medium" />
-                    )}{" "}
-                </div>
-
-                <div className="icon__btn">
-                    <FastForward fontSize="medium" />
-                </div>
+                <atom.FastRewindButton handler={rwHandler}/>
+                <atom.PlayButton playHandler={playHandler} isPlaying={playing} />
+                <atom.FastForwardButton handler={fwHandler}/>
             </div>
 
             <div className="bottom__container">
@@ -97,13 +84,7 @@ export default ({playHandler, playing}) => {
                 </div>
                 <div className="control__box">
                     <div className="inner__controls">
-                        <div className="icon__btn" onClick={playHandler}>
-                            {playing ? (
-                                <Pause fontSize="medium" />
-                            ) : (
-                                <PlayArrow fontSize="medium" />
-                            )}{" "}
-                        </div>
+                        <atom.PlayButton playHandler={playHandler} isPlaying={playing} />
                         <div className="icon__btn">
                             <SkipNext fontSize="medium" />
                         </div>

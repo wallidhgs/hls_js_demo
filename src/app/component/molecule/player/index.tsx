@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import Hls from "hls.js";
 import { Container } from "@mui/material";
 import Control from "../control/index";
@@ -12,7 +11,7 @@ interface MyProps {
   autoplay: boolean;
 }
 
-const Player= ({ url, autoplay = false }) => {
+const Player = ({ url, autoplay = false }) => {
   const playerRef = useRef<HTMLVideoElement>(null);
 
   const [videoState, setVideoState] = useState({
@@ -54,12 +53,17 @@ const Player= ({ url, autoplay = false }) => {
       setVideoState({ ...videoState, playing: !video.paused });
     }
   };
+  const fastSeek = (secs: number) => {
+    console.log(`moving ${secs} secs`)
+    // secs can be negative
+    const video = playerRef.current;
+    if (video) {
+      video.fastSeek(video.currentTime + secs);
+    }
+  };
 
   return (
     <div className="video_container">
-      <div>
-        <h2>React player</h2>
-      </div>
       <Container maxWidth="md">
         <div className="player__wrapper">
           <video
@@ -71,7 +75,12 @@ const Player= ({ url, autoplay = false }) => {
             autoPlay={autoplay}
             controls={false}
           />
-          <Control playHandler={playHandler} playing={playing} />
+          <Control
+            playHandler={playHandler}
+            playing={playing}
+            rwHandler={()=>fastSeek(-5)}
+            fwHandler ={()=>fastSeek(5)}
+          />
         </div>
       </Container>
     </div>
