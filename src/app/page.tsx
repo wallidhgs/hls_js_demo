@@ -1,8 +1,7 @@
-import Image from 'next/image'
 import styles from './page.module.css'
-import Player from './structures/molecule/player'
+import Player from './component/molecule/player/index'
 
-export default function Home() {
+export default () => {
   return (
     <main className={styles.main}>
       <div className={styles.center}>
