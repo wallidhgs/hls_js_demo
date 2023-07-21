@@ -61,6 +61,42 @@ const Player = ({ url, autoplay = false }) => {
       video.fastSeek(video.currentTime + secs);
     }
   };
+  const progressHandler = (state) => {
+    const video = playerRef.current
+    if (!seeking) {
+      if (video) setVideoState({ ...videoState, ...state, played: (video.currentTime / video.duration) });
+    }
+  };
+  const seekHandler = (_, value) => {
+    const played = parseFloat(value) / 100
+    setVideoState({ ...videoState, played });
+  };
+  const seekMouseUpHandler = (_, value) => {
+    const val = parseFloat(value)
+    const played = val / 100
+    setVideoState({ ...videoState, played });
+    const video = playerRef.current;
+    if (video) {
+      const percent = video.duration / 100
+      video.fastSeek(percent * val);
+    }
+  };
+  const volumeHandler = (_, value) => {
+    console.log('volumeHandler')
+    const volume = parseFloat(value) / 100;
+    console.log(`newVolume ${volume}`)
+    const muted = Number(volume) === 0 ? true : false
+    setVideoState({
+      ...videoState,
+      volume,
+      muted
+    })
+    const video = playerRef.current;
+    if (video) {
+      video.volume = volume;
+      video.muted = muted;
+    }
+  };
 
   return (
     <div className="video_container">
@@ -74,12 +110,18 @@ const Player = ({ url, autoplay = false }) => {
             ref={playerRef}
             autoPlay={autoplay}
             controls={false}
+            onProgress={progressHandler}
+            muted={muted}
           />
           <Control
             playHandler={playHandler}
             playing={playing}
-            rwHandler={()=>fastSeek(-5)}
-            fwHandler ={()=>fastSeek(5)}
+            rwHandler={() => fastSeek(-5)}
+            fwHandler={() => fastSeek(5)}
+            played={played}
+            seekHandler={seekHandler}
+            seekMouseUpHandler={seekMouseUpHandler}
+            volumeHandler={volumeHandler}
           />
         </div>
       </Container>

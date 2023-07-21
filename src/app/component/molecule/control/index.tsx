@@ -65,7 +65,7 @@ const PrettoSlider = withStyles({
     },
 })(Slider);
 
-export default ({ playHandler, playing, rwHandler, fwHandler }) => {
+export default ({ playHandler, playing, rwHandler, fwHandler, played, seekHandler, seekMouseUpHandler, volumeHandler }) => {
     return (
         <div className="control_Container">
             <div className="top_container">
@@ -73,14 +73,20 @@ export default ({ playHandler, playing, rwHandler, fwHandler }) => {
             </div>
 
             <div className="mid__container">
-                <atom.FastRewindButton handler={rwHandler}/>
+                <atom.FastRewindButton handler={rwHandler} />
                 <atom.PlayButton playHandler={playHandler} isPlaying={playing} />
-                <atom.FastForwardButton handler={fwHandler}/>
+                <atom.FastForwardButton handler={fwHandler} />
             </div>
 
             <div className="bottom__container">
                 <div className="slider__container">
-                    <PrettoSlider />
+                    <PrettoSlider
+                        min={0}
+                        max={100}
+                        value={played * 100}
+                        onChange={seekHandler}
+                        onChangeCommitted={seekMouseUpHandler}
+                    />
                 </div>
                 <div className="control__box">
                     <div className="inner__controls">
@@ -92,8 +98,9 @@ export default ({ playHandler, playing, rwHandler, fwHandler }) => {
                             <VolumeUp fontSize="medium" />
                         </div>
 
-                        <Slider />
-                        {/*<Slider  className={`${classes.volumeSlider}`}  /> */}
+                        <Slider
+                            onChange={volumeHandler}
+                        />
                         <span>5/20</span>
                     </div>
                 </div>
