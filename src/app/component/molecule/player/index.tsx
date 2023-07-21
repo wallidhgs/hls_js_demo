@@ -6,6 +6,9 @@ import { Container } from "@mui/material";
 import Control from "../control/index";
 import "./styles.css";
 
+
+let count = 0;
+
 const Player = ({ url, autoplay = false }) => {
   const playerRef = useRef<HTMLVideoElement>(null);
 
@@ -52,11 +55,23 @@ const Player = ({ url, autoplay = false }) => {
       video.fastSeek(video.currentTime + secs);
     }
   };
+  const controlRef = useRef(null);
   const progressHandler = (state) => {
+    // toggling player control container
+    if (count > 3) {
+      if (controlRef.current) controlRef.current.style.visibility = "hidden";
+    } else if (controlRef.current && controlRef.current.style.visibility === "visible") {
+      count += 1;
+    }
+
     const video = playerRef.current
     if (!seeking) {
       if (video) setVideoState({ ...videoState, ...state, played: (video.currentTime / video.duration) });
     }
+  };
+  const mouseMoveHandler = () => {
+    if (controlRef.current) controlRef.current.style.visibility = "visible";
+    count = 0;
   };
   const seekHandler = (_, value) => {
     const played = parseFloat(value) / 100
@@ -101,17 +116,19 @@ const Player = ({ url, autoplay = false }) => {
 
     let ret = '';
     if (h > 0) ret = `${h}:`;
-    ret +=  h > 0 && m < 10 ? `0${m}:` : `${m}:`
-    ret +=  s < 10 ? `0${s}` : `${s}`
-    
+    ret += h > 0 && m < 10 ? `0${m}:` : `${m}:`
+    ret += s < 10 ? `0${s}` : `${s}`
+
     return ret;
   }
   const video = playerRef.current;
   const currentTime = video && formatDuration(video.currentTime);
   const duration = video && formatDuration(video.duration);
 
+
+
   return (
-    <div className="video_container">
+    <div className="video_container" onMouseDown={mouseMoveHandler}>
       <Container maxWidth="md">
         <div className="player__wrapper">
           <video
@@ -126,6 +143,7 @@ const Player = ({ url, autoplay = false }) => {
             muted={muted}
           />
           <Control
+            controlRef={controlRef}
             playHandler={playHandler}
             playing={playing}
             rwHandler={() => fastSeek(-5)}

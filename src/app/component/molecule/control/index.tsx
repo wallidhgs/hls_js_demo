@@ -63,9 +63,9 @@ const PrettoSlider = withStyles({
     },
 })(Slider);
 
-export default ({ playHandler, playing, rwHandler, fwHandler, played, seekHandler, seekMouseUpHandler, volumeHandler, muteHandler, mute, currentTime, duration }) => {
+export default ({ playHandler, playing, rwHandler, fwHandler, played, seekHandler, seekMouseUpHandler, volumeHandler, muteHandler, mute, currentTime, duration, controlRef }) => {
     return (
-        <div className="control_Container">
+        <div className="control_Container" ref ={controlRef}>
             <div className="top_container">
                 <h2>Video Player</h2>
             </div>
