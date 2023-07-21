@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import Hls from "hls.js";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { Container } from "@mui/material";
 import Control from "../control/index";
 import "./styles.css";
@@ -10,6 +11,7 @@ import "./styles.css";
 let count = 0;
 
 const Player = ({ url, autoplay = false }) => {
+  const handle = useFullScreenHandle();
   const playerRef = useRef<HTMLVideoElement>(null);
 
   const [videoState, setVideoState] = useState({
@@ -125,41 +127,38 @@ const Player = ({ url, autoplay = false }) => {
   const currentTime = video && formatDuration(video.currentTime);
   const duration = video && formatDuration(video.duration);
 
-
-
   return (
-    <div className="video_container" onMouseDown={mouseMoveHandler}>
-      <Container maxWidth="md">
-        <div className="player__wrapper">
-          <video
-            className="player"
-            onClick={playHandler}
-            width="100%"
-            height="100%"
-            ref={playerRef}
-            autoPlay={autoplay}
-            controls={false}
-            onProgress={progressHandler}
-            muted={muted}
-          />
-          <Control
-            controlRef={controlRef}
-            playHandler={playHandler}
-            playing={playing}
-            rwHandler={() => fastSeek(-5)}
-            fwHandler={() => fastSeek(5)}
-            played={played}
-            seekHandler={seekHandler}
-            seekMouseUpHandler={seekMouseUpHandler}
-            volumeHandler={volumeHandler}
-            muteHandler={muteHandler}
-            mute={muted}
-            currentTime={currentTime}
-            duration={duration}
-          />
-        </div>
-      </Container>
-    </div>
+    <FullScreen handle={handle}>
+      <div className="player__wrapper" onMouseDown={mouseMoveHandler}>
+        <video
+          className="player"
+          onClick={playHandler}
+          width="100%"
+          height="100%"
+          ref={playerRef}
+          autoPlay={autoplay}
+          controls={false}
+          onProgress={progressHandler}
+          muted={muted}
+        />
+        <Control
+          controlRef={controlRef}
+          playHandler={playHandler}
+          playing={playing}
+          rwHandler={() => fastSeek(-5)}
+          fwHandler={() => fastSeek(5)}
+          played={played}
+          seekHandler={seekHandler}
+          seekMouseUpHandler={seekMouseUpHandler}
+          volumeHandler={volumeHandler}
+          muteHandler={muteHandler}
+          mute={muted}
+          currentTime={currentTime}
+          duration={duration}
+          fullScreenHandler={handle.enter}
+        />
+      </div>
+    </FullScreen>
   );
 };
 

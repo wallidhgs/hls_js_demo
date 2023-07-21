@@ -6,7 +6,8 @@ import {
 } from "@material-ui/core";
 import {
     VolumeUp,
-    VolumeOff
+    VolumeOff,
+    Fullscreen
 } from "@material-ui/icons";
 
 import "./styles.css";
@@ -63,7 +64,11 @@ const PrettoSlider = withStyles({
     },
 })(Slider);
 
-export default ({ playHandler, playing, rwHandler, fwHandler, played, seekHandler, seekMouseUpHandler, volumeHandler, muteHandler, mute, currentTime, duration, controlRef }) => {
+export default ({
+    playHandler, playing, rwHandler, fwHandler, played, seekHandler,
+    seekMouseUpHandler, volumeHandler, muteHandler, mute, currentTime,
+    duration, controlRef, fullScreenHandler
+}) => {
     return (
         <div className="control_Container" ref ={controlRef}>
             <div className="top_container">
@@ -89,11 +94,9 @@ export default ({ playHandler, playing, rwHandler, fwHandler, played, seekHandle
                 <div className="control__box">
                     <div className="inner__controls">
                         <atom.PlayButton playHandler={playHandler} isPlaying={playing} />
-                        {/*
-                        <div className="icon__btn">
-                            <SkipNext fontSize="medium" />
+                        <div className="icon__btn" onClick={fullScreenHandler}>
+                            <Fullscreen fontSize="medium" />
                         </div>
-                        */}
                         <div className="icon__btn" onClick={muteHandler} >
                             {mute ? (
                                 <VolumeOff fontSize="medium" />
