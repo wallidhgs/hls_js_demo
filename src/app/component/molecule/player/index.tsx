@@ -6,11 +6,6 @@ import { Container } from "@mui/material";
 import Control from "../control/index";
 import "./styles.css";
 
-interface MyProps {
-  url: string;
-  autoplay: boolean;
-}
-
 const Player = ({ url, autoplay = false }) => {
   const playerRef = useRef<HTMLVideoElement>(null);
 
@@ -41,20 +36,16 @@ const Player = ({ url, autoplay = false }) => {
   const playHandler = () => {
     const video = playerRef.current;
     if (video) {
-      console.log('video exists')
       if (video.paused) {
-        console.log('playing video')
         video.play();
       }
       else {
-        console.log('pausing video')
         video.pause();
       }
       setVideoState({ ...videoState, playing: !video.paused });
     }
   };
   const fastSeek = (secs: number) => {
-    console.log(`moving ${secs} secs`)
     // secs can be negative
     const video = playerRef.current;
     if (video) {
@@ -82,9 +73,7 @@ const Player = ({ url, autoplay = false }) => {
     }
   };
   const volumeHandler = (_, value) => {
-    console.log('volumeHandler')
     const volume = parseFloat(value) / 100;
-    console.log(`newVolume ${volume}`)
     const muted = Number(volume) === 0 ? true : false
     setVideoState({
       ...videoState,
@@ -97,6 +86,29 @@ const Player = ({ url, autoplay = false }) => {
       video.muted = muted;
     }
   };
+  const muteHandler = () => {
+    const muted = !videoState.muted;
+    setVideoState({ ...videoState, muted });
+
+    const video = playerRef.current;
+    if (video) video.muted = muted;
+  };
+
+  const formatDuration = (secs: number) => {
+    const h = Math.floor(secs % (3600 * 24) / 3600);
+    const m = Math.floor(secs % 3600 / 60);
+    const s = Math.floor(secs % 60);
+
+    let ret = '';
+    if (h > 0) ret = `${h}:`;
+    ret +=  h > 0 && m < 10 ? `0${m}:` : `${m}:`
+    ret +=  s < 10 ? `0${s}` : `${s}`
+    
+    return ret;
+  }
+  const video = playerRef.current;
+  const currentTime = video && formatDuration(video.currentTime);
+  const duration = video && formatDuration(video.duration);
 
   return (
     <div className="video_container">
@@ -122,6 +134,10 @@ const Player = ({ url, autoplay = false }) => {
             seekHandler={seekHandler}
             seekMouseUpHandler={seekMouseUpHandler}
             volumeHandler={volumeHandler}
+            muteHandler={muteHandler}
+            mute={muted}
+            currentTime={currentTime}
+            duration={duration}
           />
         </div>
       </Container>
