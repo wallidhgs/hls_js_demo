@@ -10,7 +10,7 @@ import "./styles.css";
 let count = 0;
 
 const Player = ({ url, autoplay = false, title }) => {
-  const handle = useFullScreenHandle();
+  const fsHandle = useFullScreenHandle();
   const playerRef = useRef<HTMLVideoElement>(null);
 
   const [videoState, setVideoState] = useState({
@@ -125,13 +125,16 @@ const Player = ({ url, autoplay = false, title }) => {
   const video = playerRef.current;
   const currentTime = video && formatDuration(video.currentTime);
   const duration = video && formatDuration(video.duration);
+  const fsHandle2 = () => {
+    console.log('New FS')
+    if (video) video.requestFullscreen()
+  }
 
   return (
-    <FullScreen handle={handle}>
+    <FullScreen handle={fsHandle}>
       <div className="player__wrapper" onMouseDown={mouseMoveHandler}>
         <video
           className="player"
-          onClick={playHandler}
           width="100%"
           height="100%"
           ref={playerRef}
@@ -155,7 +158,8 @@ const Player = ({ url, autoplay = false, title }) => {
           mute={muted}
           currentTime={currentTime}
           duration={duration}
-          fullScreenHandler={handle}
+          fullScreenHandler={fsHandle}
+          fullScreenHandler2={fsHandle2}
         />
       </div>
     </FullScreen>

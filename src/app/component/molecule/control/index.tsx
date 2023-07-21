@@ -11,7 +11,7 @@ import atom from "../../atom";
 export default ({
     playHandler, playing, rwHandler, fwHandler, played, seekHandler,
     seekMouseUpHandler, volumeHandler, muteHandler, mute, currentTime,
-    duration, controlRef, fullScreenHandler, title
+    duration, controlRef, fullScreenHandler, fullScreenHandler2, title
 }) => {
     return (
         <div className="control_Container" ref={controlRef}>
@@ -30,7 +30,7 @@ export default ({
                 <div className="control__box">
                     <div className="inner__controls">
                         <atom.PlayButton playHandler={playHandler} isPlaying={playing} />
-                        <atom.FullscreenButton handler={fullScreenHandler} />
+                        <atom.FullscreenButton handler={fullScreenHandler} handler2={fullScreenHandler2} />
                         <atom.MuteButton muteHandler={muteHandler} mute={mute} />
                         <Slider onChange={volumeHandler} />
                         <span>{`${currentTime}/${duration}`}</span>
