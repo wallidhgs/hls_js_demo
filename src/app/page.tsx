@@ -8,6 +8,7 @@ export default () => {
         <Player
           url='https://cdn.jwplayer.com/manifests/8Hw3FD28.m3u8'
           autoplay={false}
+          title={'Tears of Steel'}
         />
       </div>
     </main>

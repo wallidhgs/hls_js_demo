@@ -7,10 +7,9 @@ import { Container } from "@mui/material";
 import Control from "../control/index";
 import "./styles.css";
 
-
 let count = 0;
 
-const Player = ({ url, autoplay = false }) => {
+const Player = ({ url, autoplay = false, title }) => {
   const handle = useFullScreenHandle();
   const playerRef = useRef<HTMLVideoElement>(null);
 
@@ -22,7 +21,7 @@ const Player = ({ url, autoplay = false }) => {
     seeking: false,
     Buffer: true
   });
-  const { playing, muted, volume, playbackRate, played, seeking, buffer } = videoState;
+  const { playing, muted, volume, played, seeking } = videoState;
 
   useEffect(() => {
     const video = playerRef.current;
@@ -142,6 +141,7 @@ const Player = ({ url, autoplay = false }) => {
           muted={muted}
         />
         <Control
+          title={title}
           controlRef={controlRef}
           playHandler={playHandler}
           playing={playing}
