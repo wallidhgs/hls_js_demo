@@ -8,23 +8,6 @@ import {
 import "./styles.css";
 import atom from "../../atom";
 
-const useStyles = makeStyles({
-    volumeSlider: {
-        width: "100px",
-        color: "#9556CC",
-    },
-
-    bottomIcons: {
-        color: "#999",
-        padding: "12px 8px",
-
-
-        "&:hover": {
-            color: "#fff",
-        },
-    },
-});
-
 export default ({
     playHandler, playing, rwHandler, fwHandler, played, seekHandler,
     seekMouseUpHandler, volumeHandler, muteHandler, mute, currentTime,

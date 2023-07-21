@@ -155,7 +155,7 @@ const Player = ({ url, autoplay = false, title }) => {
           mute={muted}
           currentTime={currentTime}
           duration={duration}
-          fullScreenHandler={handle.enter}
+          fullScreenHandler={handle}
         />
       </div>
     </FullScreen>
