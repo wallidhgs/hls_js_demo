@@ -57,7 +57,6 @@ const Player = ({ url, autoplay = false, title }) => {
   };
   const controlRef = useRef(null);
   const progressHandler = (state) => {
-    // toggling player control container
     if (count > 3) {
       if (controlRef.current) controlRef.current.style.visibility = "hidden";
     } else if (controlRef.current && controlRef.current.style.visibility === "visible") {
@@ -130,7 +129,7 @@ const Player = ({ url, autoplay = false, title }) => {
 
   return (
     <FullScreen handle={fsHandle}>
-      <div className="player__wrapper" onMouseDown={mouseMoveHandler}>
+      <div className="player_wrapper" onMouseDown={mouseMoveHandler}>
         <video
           className="player"
           width="100%"
