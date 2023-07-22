@@ -3,8 +3,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import Hls from "hls.js";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
-import { Container } from "@mui/material";
-import Control from "../control/index";
+import Molecules from "../../molecules";
 import "./styles.css";
 
 let count = 0;
@@ -126,7 +125,6 @@ const Player = ({ url, autoplay = false, title }) => {
   const currentTime = video && formatDuration(video.currentTime);
   const duration = video && formatDuration(video.duration);
   const fsHandle2 = () => {
-    console.log('New FS')
     if (video) video.requestFullscreen()
   }
 
@@ -143,7 +141,7 @@ const Player = ({ url, autoplay = false, title }) => {
           onProgress={progressHandler}
           muted={muted}
         />
-        <Control
+        <Molecules.Control
           title={title}
           controlRef={controlRef}
           playHandler={playHandler}

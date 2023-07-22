@@ -1,12 +1,11 @@
+"use client"
+
 import React from "react";
 
-import {
-    makeStyles, Slider, withStyles, Button, Tooltip, Popover, Grid
-
-} from "@material-ui/core";
+import { Slider } from "@material-ui/core";
+import Atoms from "../../atoms";
 
 import "./styles.css";
-import atom from "../../atom";
 
 export default ({
     playHandler, playing, rwHandler, fwHandler, played, seekHandler,
@@ -20,18 +19,18 @@ export default ({
             </div>
 
             <div className="mid__container">
-                <atom.FastRewindButton handler={rwHandler} />
-                <atom.PlayButton playHandler={playHandler} isPlaying={playing} />
-                <atom.FastForwardButton handler={fwHandler} />
+                <Atoms.FastRewindButton handler={rwHandler} />
+                <Atoms.PlayButton playHandler={playHandler} isPlaying={playing} />
+                <Atoms.FastForwardButton handler={fwHandler} />
             </div>
 
             <div className="bottom__container">
-                <atom.ProgressSlider played={played} seekHandler={seekHandler} seekMouseUpHandler={seekMouseUpHandler} />
+                <Atoms.ProgressSlider played={played} seekHandler={seekHandler} seekMouseUpHandler={seekMouseUpHandler} />
                 <div className="control__box">
                     <div className="inner__controls">
-                        <atom.PlayButton playHandler={playHandler} isPlaying={playing} />
-                        <atom.FullscreenButton handler={fullScreenHandler} handler2={fullScreenHandler2} />
-                        <atom.MuteButton muteHandler={muteHandler} mute={mute} />
+                        <Atoms.PlayButton playHandler={playHandler} isPlaying={playing} />
+                        <Atoms.FullscreenButton handler={fullScreenHandler} handler2={fullScreenHandler2} />
+                        <Atoms.MuteButton muteHandler={muteHandler} mute={mute} />
                         <Slider onChange={volumeHandler} />
                         <span>{`${currentTime}/${duration}`}</span>
                     </div>

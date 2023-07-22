@@ -5,8 +5,7 @@ import MuteButton from './muteButton'
 import FullscreenButton from './fullscreenButton'
 import ProgressSlider from './progressSlider'
 
-
-export default {
+const Atoms = {
     PlayButton,
     FastForwardButton,
     FastRewindButton,
@@ -14,3 +13,5 @@ export default {
     FullscreenButton,
     ProgressSlider
 }
+
+export default Atoms;
