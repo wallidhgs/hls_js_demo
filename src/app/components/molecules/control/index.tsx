@@ -10,7 +10,7 @@ import "./styles.css";
 export default ({
     playHandler, playing, rwHandler, fwHandler, played, seekHandler,
     seekMouseUpHandler, volumeHandler, muteHandler, mute, currentTime,
-    duration, controlRef, fullScreenHandler, fullScreenHandler2, title
+    duration, controlRef, fullScreenHandler, title
 }) => {
     return (
         <div className="control_Container" ref={controlRef}>
@@ -29,7 +29,7 @@ export default ({
                 <div className="control__box">
                     <div className="inner__controls">
                         <Atoms.PlayButton playHandler={playHandler} isPlaying={playing} />
-                        <Atoms.FullscreenButton handler={fullScreenHandler} handler2={fullScreenHandler2} />
+                        <Atoms.FullscreenButton handler={fullScreenHandler} />
                         <Atoms.MuteButton muteHandler={muteHandler} mute={mute} />
                         <Slider onChange={volumeHandler} />
                         <span>{`${currentTime}/${duration}`}</span>

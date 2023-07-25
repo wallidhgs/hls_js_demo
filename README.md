@@ -21,8 +21,9 @@ To learn more about Next.js, take a look at the following resources:
 
 - [Next.js][Next.js]
 
-## Deploy on Vercel
+## Notes
 
+Currently this version of the project works 100% on Mozilla Firefox, Chrome have some visual bugs and Safari shows some style issues, having the video on top of the controls and fullscreen not working properly.
 
 [requirements_md]: requirements.md
 [Next.js]: https://nextjs.org/

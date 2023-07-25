@@ -123,12 +123,6 @@ const Player = ({ url, autoplay = false, title }) => {
   const video = playerRef.current;
   const currentTime = video && formatDuration(video.currentTime);
   const duration = video && formatDuration(video.duration);
-  const fsHandle2 = () => {
-    if (video) {
-      const rfs = video.requestFullscreen || video.webkitRequestFullScreen || video.mozRequestFullScreen || video.msRequestFullscreen;
-      rfs.call(video);
-    }
-  }
 
   return (
     <FullScreen handle={fsHandle}>
@@ -159,7 +153,6 @@ const Player = ({ url, autoplay = false, title }) => {
           currentTime={currentTime}
           duration={duration}
           fullScreenHandler={fsHandle}
-          fullScreenHandler2={fsHandle2}
         />
       </div>
     </FullScreen>

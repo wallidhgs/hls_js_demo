@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Fullscreen } from "@material-ui/icons";
 import "./styles.css";
 
-const FullscreenButton = ({ handler, handler2 }) => {
+const FullscreenButton = ({ handler }) => {
   const [videoState, setVideoState] = useState({
     isFullscreen: false
   });
@@ -17,7 +17,7 @@ const FullscreenButton = ({ handler, handler2 }) => {
   };
 
   return (
-    <div className="icon__btn" onClick={handler2}>
+    <div className="icon__btn" onClick={fullscreenHandler}>
       <Fullscreen fontSize="medium" />
     </div>
   );
