@@ -124,7 +124,10 @@ const Player = ({ url, autoplay = false, title }) => {
   const currentTime = video && formatDuration(video.currentTime);
   const duration = video && formatDuration(video.duration);
   const fsHandle2 = () => {
-    if (video) video.requestFullscreen()
+    if (video) {
+      const rfs = video.requestFullscreen || video.webkitRequestFullScreen || video.mozRequestFullScreen || video.msRequestFullscreen;
+      rfs.call(video);
+    }
   }
 
   return (
