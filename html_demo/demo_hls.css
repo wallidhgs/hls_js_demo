@@ -1,0 +1,104 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 100%;
+}
+
+#video {
+    width: 100%;
+    height: auto;
+}
+
+.custom-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.custom-controls.visible {
+    opacity: 1;
+}
+
+.custom-controls.hidden {
+    opacity: 0;
+}
+
+.custom-controls button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 16px;
+    padding: 8px 12px;
+    margin: 0 5px;
+}
+
+.custom-controls input[type="range"] {
+    width: 150px;
+    margin: 0 10px;
+}
+
+.custom-controls input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.custom-controls input[type="range"]::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.custom-controls input[type="range"]::-ms-thumb {
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.custom-controls input[type="range"]::-webkit-slider-runnable-track,
+.custom-controls input[type="range"]::-moz-range-track,
+.custom-controls input[type="range"]::-ms-track {
+    height: 3px;
+    background-color: #ccc;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.custom-controls input[type="range"]::-ms-fill-lower {
+    background-color: #ccc;
+    border-radius: 2px;
+}
+
+.custom-controls input[type="range"]::-ms-fill-upper {
+    background-color: #ccc;
+    border-radius: 2px;
+}
+
+.custom-controls input[type="range"]::-webkit-slider-thumb:hover,
+.custom-controls input[type="range"]::-moz-range-thumb:hover,
+.custom-controls input[type="range"]::-ms-thumb:hover {
+    background-color: #fff;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+}

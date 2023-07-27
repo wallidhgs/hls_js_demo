@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Video Player</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+    <link rel="stylesheet" href="demo_hls.css" />
+    <script src="demo_hls.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div id="player">
+            <video id="video" autoplay>
+                Your browser does not support the video tag.
+            </video>
+            <div class="custom-controls">
+                <button id="fastBackwardBtn"><i class="fas fa-backward"></i></button>
+                <button id="playPauseBtn"><i class="fas fa-play"></i></button>
+                <button id="fastForwardBtn"><i class="fas fa-forward"></i></button>
+                <button id="restartBtn"><i class="fas fa-redo-alt"></i></button>
+                <div id="timeDisplay">0:00/0:00</div>
+                <input type="range" id="progressSlider" min="0" value="0" step="0.01">
+                <button id="muteBtn"><i class="fas fa-volume-up"></i></button>
+                <input type="range" id="volumeRange" min="0" max="1" step="0.1">
+                <button id="fullscreenBtn"><i class="fas fa-expand"></i></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
