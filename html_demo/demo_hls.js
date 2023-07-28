@@ -153,13 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     document.addEventListener('fullscreenchange', () => {
         if (isFullscreen()) {
-            // Make the player 100% width and height
-            // player.style.width = '100%';
-            // player.style.height = '100%';
+            container.classList.add('fullscreen');
         } else {
-            // Restore the player size when exiting fullscreen
-            // player.style.width = 'auto';
-            // player.style.height = 'auto';
+            container.classList.remove('fullscreen');
         }
     });
 });
